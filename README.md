@@ -1,6 +1,6 @@
 # GoogCurrency
 
-TODO: Write a gem description
+A simple Ruby interface for currency conversion using Google API. Uses http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
 
 ## Installation
 
@@ -18,7 +18,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Sample usage
+
+    usd = GoogCurrency.usd_to_inr(1)
+    gbp = GoogCurrency.usd_to_gbp(1)
+
+Throws GoogCurrency::Exception in case of any error.
+
+Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 
 ## Contributing
 
