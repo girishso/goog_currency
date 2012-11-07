@@ -13,8 +13,15 @@ module GoogCurrency
     # response is not valid json
     response.gsub!(/(lhs|rhs|error|icc)/, '"\1"')
     response_hash = JSON.parse(response)
-    response_hash['rhs'].to_f
+
+    if response_hash['error'].nil? or response_hash['error'] == ''
+      response_hash['rhs'].to_f
+    else
+      raise GoogCurrency::Exception, "An error occurred: #{response_hash['error']}"
+    end
 
     # super
   end
+  
+  class Exception < StandardError; end
 end
