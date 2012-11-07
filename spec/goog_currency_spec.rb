@@ -18,7 +18,7 @@ describe "GoogCurrency" do
                            "http://www.google.com/ig/calculator?hl=en&q=1USD=?INR",
                            :status => "200",
                            :body => valid_response)
-      usd = GoogCurrency.usd_to_inx(1)
+      usd = GoogCurrency.usd_to_inr(1)
       usd.should == 54.836587
     end
   end
