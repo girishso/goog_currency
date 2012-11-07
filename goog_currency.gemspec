@@ -11,7 +11,8 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Gem for currency conversion using Google API}
   gem.summary       = %q{Simple Ruby interface to Google Currency API}
   gem.homepage      = ""
-  gem.add_development_dependency "rspec", "~> 2.12"
+  gem.add_development_dependency "rspec", "~> 2.12.0"
+  gem.add_development_dependency "fakeweb", "~> 1.3.0"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
