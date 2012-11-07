@@ -4,9 +4,11 @@ require 'json'
 
 module GoogCurrency
   def self.method_missing(meth, *args)
-    puts "meee! meth=#{meth} args=#{args}"
-    
     from, to = meth.to_s.split("_to_")
+    
+    if from.nil? or to.nil?
+      raise GoogCurrency::NoMethodException, "GoogCurrency accepts methods in 'usd_to_inr' or 'gbp_to_usd' format"
+    end
     
     response = RestClient.get("http://www.google.com/ig/calculator?hl=en&q=#{args.first}#{from.upcase}=?#{to.upcase}").body
     
@@ -19,9 +21,8 @@ module GoogCurrency
     else
       raise GoogCurrency::Exception, "An error occurred: #{response_hash['error']}"
     end
-
-    # super
   end
   
   class Exception < StandardError; end
+  class NoMethodException < StandardError; end
 end

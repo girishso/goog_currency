@@ -29,13 +29,13 @@ describe "GoogCurrency" do
                            "http://www.google.com/ig/calculator?hl=en&q=1USD=?INX",
                            :status => "200",
                            :body => invalid_response)
-      expect { GoogCurrency.usd_to_inx(1) }.to raise_error
+      expect { GoogCurrency.usd_to_inx(1) }.to raise_error(GoogCurrency::Exception)
     end
   end
   
   describe "invalid method" do
     it "throws exception for invalid method" do
-      pending
+      expect { GoogCurrency.usd_2_inr(1) }.to raise_error(GoogCurrency::NoMethodException)
     end
   end
 
