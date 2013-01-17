@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = GoogCurrency::VERSION
   gem.authors       = ["Girish S"]
   gem.email         = ["girish.sonawane@gmail.com"]
-  gem.description   = %q{Gem for currency conversion using Google API}
+  gem.description   = %q{Ruby Gem for currency conversion using Google API}
   gem.summary       = %q{Simple Ruby interface to Google Currency API}
   gem.add_runtime_dependency 'rest-client', '~> 1.6.7'
   gem.add_runtime_dependency 'json', '~> 1.7.5'

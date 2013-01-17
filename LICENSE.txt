@@ -1,4 +1,4 @@
-Copyright (c) 2012 Girish S
+Copyright (c) 2013 Girish Sonawane
 
 MIT License
 
