@@ -22,6 +22,7 @@ Sample usage
 
     usd = GoogCurrency.usd_to_inr(1)
     gbp = GoogCurrency.usd_to_gbp(1)
+    jpy = GoogCurrency.gbp_to_jpy(1)
 
 Throws GoogCurrency::Exception in case of any error.
 
