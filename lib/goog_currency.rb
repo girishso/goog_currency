@@ -17,7 +17,17 @@ module GoogCurrency
     response_hash = JSON.parse(response)
 
     if response_hash['error'].nil? or response_hash['error'] == ''
-      response_hash['rhs'].to_f
+      #
+      # Remove unicode character used as thousands separator by the Google API
+      # Thanks to Nathan Long, http://stackoverflow.com/a/9420531
+      #
+      encoding_options = {
+          :invalid           => :replace,  # Replace invalid byte sequences
+          :undef             => :replace,  # Replace anything not defined in ASCII
+          :replace           => '',        # Use a blank for those replacements
+          :universal_newline => true       # Always break lines with \n
+        }
+        response_hash['rhs'].encode(Encoding.find('ASCII'), encoding_options).to_f
     else
       raise GoogCurrency::Exception, "An error occurred: #{response_hash['error']}"
     end

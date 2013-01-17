@@ -7,6 +7,10 @@ valid_response =<<-VALID
 {lhs: "1 U.S. dollar",rhs: "54.836587 Indian rupees",error: "",icc: true}
 VALID
 
+valid100_response =<<-VALID_100
+{lhs: "100 U.S. dollar",rhs: "5\u0080483.6587 Indian rupees",error: "",icc: true}
+VALID_100
+
 invalid_response =<<-INVALID
 {lhs: "",rhs: "",error: "4",icc: false}
 INVALID
@@ -20,6 +24,15 @@ describe "GoogCurrency" do
                            :body => valid_response)
       usd = GoogCurrency.usd_to_inr(1)
       usd.should == 54.836587
+    end
+
+    it  "ignores thousands separator correctly" do
+      FakeWeb.register_uri(:get,
+                           "http://www.google.com/ig/calculator?hl=en&q=100USD=?INR",
+                           :status => "200",
+                           :body => valid100_response)
+      usd = GoogCurrency.usd_to_inr(100)
+      usd.should == 5483.6587
     end
   end
 
