@@ -22,9 +22,9 @@ Or install it yourself as:
 
 Sample usage
 
-    usd = GoogCurrency.usd_to_inr(1)
-    gbp = GoogCurrency.usd_to_gbp(1)
-    jpy = GoogCurrency.gbp_to_jpy(1)
+    rupees = GoogCurrency.usd_to_inr(1)
+    pounds = GoogCurrency.usd_to_gbp(1)
+    yen = GoogCurrency.gbp_to_jpy(1)
 
 Throws GoogCurrency::Exception in case of any error.
 
@@ -39,6 +39,7 @@ Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 5. Create new Pull Request
 
 ## Licence
+MIT License
+
 Copyright (c) 2013 Girish Sonawane
 
-MIT License
