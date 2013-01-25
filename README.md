@@ -41,7 +41,7 @@ Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 ## Licence
 MIT License
 
-Warning: This software is provided as is, use it your own risk.
+This software is provided as is, use it your own risk.
 
 Copyright (c) 2013 Girish Sonawane
 
