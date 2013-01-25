@@ -2,7 +2,7 @@
 
 A simple Ruby interface for currency conversion using Google API. Uses http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
 
-Current version: 0.0.2
+[![Build Status](https://travis-ci.org/girishso/goog_currency.png?branch=master)](https://travis-ci.org/girishso/goog_currency) [![Gem Version](https://badge.fury.io/rb/goog_currency.png)](http://badge.fury.io/rb/goog_currency)
 
 ## Installation
 
@@ -40,6 +40,8 @@ Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 
 ## Licence
 MIT License
+
+Warning: This software is provided as is, use it your own risk.
 
 Copyright (c) 2013 Girish Sonawane
 
