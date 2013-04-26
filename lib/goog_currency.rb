@@ -1,6 +1,7 @@
 require "goog_currency/version"
 require 'rest_client'
 require 'json'
+require 'iconv'
 
 module GoogCurrency
   def self.method_missing(meth, *args)
@@ -20,14 +21,17 @@ module GoogCurrency
       #
       # Remove unicode character used as thousands separator by the Google API
       # Thanks to Nathan Long, http://stackoverflow.com/a/9420531
-      #
-      encoding_options = {
-          :invalid           => :replace,  # Replace invalid byte sequences
-          :undef             => :replace,  # Replace anything not defined in ASCII
-          :replace           => '',        # Use a blank for those replacements
-          :universal_newline => true       # Always break lines with \n
-        }
-        response_hash['rhs'].encode(Encoding.find('ASCII'), encoding_options).to_f
+      #	For Ruby 1.9
+      #encoding_options = {
+      #    :invalid           => :replace,  # Replace invalid byte sequences
+      #    :undef             => :replace,  # Replace anything not defined in ASCII
+      #    :replace           => '',        # Use a blank for those replacements
+      #    :universal_newline => true       # Always break lines with \n
+      #  }
+      #  response_hash['rhs'].encode(Encoding.find('ASCII'), encoding_options).to_f
+
+      #For Ruby 1.8
+      Iconv.conv('ASCII//IGNORE', 'UTF8', response_hash['rhs']).to_f
     else
       raise Exception, "An error occurred: #{response_hash['error']}"
     end
