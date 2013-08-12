@@ -10,7 +10,7 @@ VALID
 valid100_response =<<-VALID_100
 {lhs: "100 U.S. dollar",rhs: "5\u0080483.6587 Indian rupees",error: "",icc: true}
 VALID_100
-
+ 
 invalid_response =<<-INVALID
 {lhs: "",rhs: "",error: "4",icc: false}
 INVALID
@@ -33,6 +33,12 @@ describe "GoogCurrency" do
                            :body => valid100_response)
       usd = GoogCurrency.usd_to_inr(100)
       usd.should == 5483.6587
+    end
+
+    it  "ignores new thousands separator correctly" do
+      # performs live api call, not possible to reproduce the string
+      # returned by the api
+      expect { GoogCurrency.usd_to_inr(100) }.to_not raise_error 
     end
   end
 
