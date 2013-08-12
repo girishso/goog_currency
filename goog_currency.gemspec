@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["girish.sonawane@gmail.com"]
   gem.description   = %q{Ruby Gem for currency conversion using Google API}
   gem.summary       = %q{Simple Ruby interface to Google Currency API}
-  gem.add_runtime_dependency 'rest-client', '~> 1.6.7'
+  gem.add_runtime_dependency 'rest-client'
   gem.add_runtime_dependency 'json'
   
   gem.add_development_dependency "rspec", "~> 2.12.0"
