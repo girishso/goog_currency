@@ -3,6 +3,7 @@ require 'rest_client'
 require 'json'
 
 module GoogCurrency
+  MILLION = 1_000_000
   def self.method_missing(meth, *args)
     from, to = meth.to_s.split("_to_")
 
@@ -25,7 +26,15 @@ module GoogCurrency
     response_hash = JSON.parse(response)
 
     if response_hash['error'].nil? or response_hash['error'] == ''
-      response_hash['rhs'].to_f
+      if response_hash['rhs'].match(/million/)
+        response_hash['rhs'].to_f * MILLION
+      elsif response_hash['rhs'].match(/billion/)
+        response_hash['rhs'].to_f * MILLION * 1_000
+      elsif response_hash['rhs'].match(/trillion/)
+        response_hash['rhs'].to_f * MILLION * MILLION
+      else
+        response_hash['rhs'].to_f
+      end
     else
       raise Exception, "An error occurred: #{response_hash['error']}"
     end

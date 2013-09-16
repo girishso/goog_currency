@@ -40,6 +40,34 @@ describe "GoogCurrency" do
       # returned by the api
       expect { GoogCurrency.usd_to_inr(100) }.to_not raise_error 
     end
+
+    it "converts millions" do
+      FakeWeb.register_uri(:get,
+                           "http://www.google.com/ig/calculator?hl=en&q=500USD=?UGX",
+                           :status => "200",
+                           :body => '{lhs: "500 U.S. dollars",rhs: "1.28534704 million Ugandan shillings",error: "",icc: true}')
+      ugx = GoogCurrency.usd_to_ugx(500)
+      ugx.should == 1_285_347.04
+    end
+
+    it "converts billions" do
+      FakeWeb.register_uri(:get,
+                           "http://www.google.com/ig/calculator?hl=en&q=500000USD=?UGX",
+                           :status => "200",
+                           :body => '{lhs: "500000 U.S. dollars",rhs: "1.28534704 billion Ugandan shillings",error: "",icc: true}')
+      ugx = GoogCurrency.usd_to_ugx(500_000)
+      ugx.should == 1_285_347_040.0
+    end
+
+    it "converts trillions" do
+      FakeWeb.register_uri(:get,
+                           "http://www.google.com/ig/calculator?hl=en&q=500000000USD=?UGX",
+                           :status => "200",
+                           :body => '{lhs: "500000000 U.S. dollars",rhs: "1.28534704 trillion Ugandan shillings",error: "",icc: true}')
+      ugx = GoogCurrency.usd_to_ugx(500_000_000)
+      ugx.should == 1_285_347_040_000.0
+    end
+
   end
 
   describe "invalid currencies" do
