@@ -26,11 +26,12 @@ module GoogCurrency
     response_hash = JSON.parse(response)
 
     if response_hash['error'].nil? or response_hash['error'] == ''
-      if response_hash['rhs'].match(/million/)
+      case response_hash['rhs']
+      when /million/
         response_hash['rhs'].to_f * MILLION
-      elsif response_hash['rhs'].match(/billion/)
+      when /billion/
         response_hash['rhs'].to_f * MILLION * 1_000
-      elsif response_hash['rhs'].match(/trillion/)
+      when /trillion/
         response_hash['rhs'].to_f * MILLION * MILLION
       else
         response_hash['rhs'].to_f
