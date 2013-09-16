@@ -7,7 +7,7 @@ module GoogCurrency
   def self.method_missing(meth, *args)
     from, to = meth.to_s.split("_to_")
 
-    if from.nil? or to.nil?
+    if from.nil? or to.nil? or from == "" or to == ""
       raise NoMethodException, "GoogCurrency accepts methods in 'usd_to_inr' or 'gbp_to_usd' format"
     end
 
@@ -38,6 +38,16 @@ module GoogCurrency
       end
     else
       raise Exception, "An error occurred: #{response_hash['error']}"
+    end
+  end
+
+  def self.respond_to?(meth)
+    from, to = meth.to_s.split("_to_")
+
+    if from.nil? or from == "" or to.nil? or to == ""
+      super
+    else
+      true
     end
   end
 
