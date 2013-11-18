@@ -1,5 +1,7 @@
 # GoogCurrency
 
+## Unfortunately the API stopped working on Nov. 1st 2013. This gem can no longer be used.
+
 A simple Ruby interface for currency conversion using Google API. Uses http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
 
 [![Build Status](https://travis-ci.org/girishso/goog_currency.png?branch=master)](https://travis-ci.org/girishso/goog_currency) [![Gem Version](https://badge.fury.io/rb/goog_currency.png)](http://badge.fury.io/rb/goog_currency)
