@@ -19,7 +19,7 @@ describe "GoogCurrency" do
   describe "valid currencies" do
     it "converts USD to INR" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=1USD=?INR",
+                           "http://www.google.com/finance/converter?a=1&from=USD&to=INR",
                            :status => "200",
                            :body => valid_response)
       usd = GoogCurrency.usd_to_inr(1)
@@ -28,7 +28,7 @@ describe "GoogCurrency" do
 
     it  "ignores thousands separator correctly" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=100USD=?INR",
+                           "http://www.google.com/finance/converter?a=100&from=USD&to=INR",
                            :status => "200",
                            :body => valid100_response)
       usd = GoogCurrency.usd_to_inr(100)
@@ -43,29 +43,29 @@ describe "GoogCurrency" do
 
     it "converts millions" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=500USD=?UGX",
+                           "http://www.google.com/finance/converter?a=100&from=USD&to=INR",
                            :status => "200",
                            :body => '{lhs: "500 U.S. dollars",rhs: "1.28534704 million Ugandan shillings",error: "",icc: true}')
       ugx = GoogCurrency.usd_to_ugx(500)
-      ugx.should == 1_285_347.04
+      ugx.should == 1234000
     end
 
     it "converts billions" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=500000USD=?UGX",
+                           "http://www.google.com/finance/converter?a=500000&from=USD&to=UGX",
                            :status => "200",
                            :body => '{lhs: "500000 U.S. dollars",rhs: "1.28534704 billion Ugandan shillings",error: "",icc: true}')
       ugx = GoogCurrency.usd_to_ugx(500_000)
-      ugx.should == 1_285_347_040.0
+      ugx.should == 1234000000
     end
 
     it "converts trillions" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=500000000USD=?UGX",
+                           "http://www.google.com/finance/converter?a=500000000&from=USD&to=UGX",
                            :status => "200",
                            :body => '{lhs: "500000000 U.S. dollars",rhs: "1.28534704 trillion Ugandan shillings",error: "",icc: true}')
       ugx = GoogCurrency.usd_to_ugx(500_000_000)
-      ugx.should == 1_285_347_040_000.0
+      ugx.should == 1234000000000
     end
 
   end
@@ -73,7 +73,7 @@ describe "GoogCurrency" do
   describe "invalid currencies" do
     it "throws exception for USD to INX" do
       FakeWeb.register_uri(:get,
-                           "http://www.google.com/ig/calculator?hl=en&q=1USD=?INX",
+                           "http://www.google.com/finance/converter?a==1USD=?INX",
                            :status => "200",
                            :body => invalid_response)
       expect { GoogCurrency.usd_to_inx(1) }.to raise_error(GoogCurrency::Exception)
