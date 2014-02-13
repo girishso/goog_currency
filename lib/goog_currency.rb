@@ -25,7 +25,7 @@ module GoogCurrency
 
   def self.handle_response(response)
     value = response.scan(/<span class=bld>([^.]+(?:\.(?:\d+))?)/)
-    raise "An error occurred: Currency not found" if value.empty?
+    raise Exception, "An error occurred: Currency not found" if value.empty?
     value[0][0].to_f
   end
 
