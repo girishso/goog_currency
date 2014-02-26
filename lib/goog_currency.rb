@@ -1,9 +1,7 @@
 require "goog_currency/version"
-require 'rest_client'
-require 'json'
+require 'open-uri'
 
 module GoogCurrency
-  MILLION = 1_000_000
   def self.method_missing(meth, *args)
     from, to = meth.to_s.split("_to_")
 
@@ -11,24 +9,8 @@ module GoogCurrency
       raise NoMethodException, "GoogCurrency accepts methods in 'usd_to_inr' or 'gbp_to_usd' format"
     end
 
-    response = RestClient.get("http://www.google.com/ig/calculator?hl=en&q=#{args.first}#{from.upcase}=?#{to.upcase}").body
-
-    response_hash = convert_response(response)
-
-    if response_hash['error'].nil? or response_hash['error'] == ''
-      case response_hash['rhs']
-      when /million/
-        response_hash['rhs'].to_f * MILLION
-      when /billion/
-        response_hash['rhs'].to_f * MILLION * 1_000
-      when /trillion/
-        response_hash['rhs'].to_f * MILLION * MILLION
-      else
-        response_hash['rhs'].to_f
-      end
-    else
-      raise Exception, "An error occurred: #{response_hash['error']}"
-    end
+    response = open("http://www.google.com/finance/converter?a=#{args.first}&from=#{from.upcase}&to=#{to.upcase}").read
+    handle_response(response)
   end
 
   def self.respond_to?(meth)
@@ -39,6 +21,12 @@ module GoogCurrency
     else
       true
     end
+  end
+
+  def self.handle_response(response)
+    value = response.scan(/<span class=bld>([^.]+(?:\.(?:\d+))?)/)
+    raise Exception, "An error occurred: Currency not found" if value.empty?
+    value[0][0].to_f
   end
 
   def self.convert_response(response)

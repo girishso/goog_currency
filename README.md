@@ -1,6 +1,10 @@
 # GoogCurrency
 
-## Unfortunately the API stopped working on Nov. 1st 2013. This gem can no longer be used.
+## Google finance provides currency conversion functionality. Integrated the scrapper to get currency.
+Now uses http://www.google.com/finance/converter?a=1&from=USD&to=INR
+
+## Unfortunately the Google API stopped working on Nov. 1st 2013.
+
 
 A simple Ruby interface for currency conversion using Google API. Uses http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
 
