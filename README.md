@@ -31,10 +31,11 @@ Throws GoogCurrency::Exception in case of any error.
 
 Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 
-## Ruby versions support
+## Credits
 
-Supports Ruby 1.8.7, 1.9.2 and 2.0.0
+[girishso](https://github.com/girishso) - Initial implementation
 
+[pankajso](https://github.com/pankajso) - Ported to use Google Finance
 
 ## Contributing
 
