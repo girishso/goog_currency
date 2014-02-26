@@ -1,12 +1,7 @@
 # GoogCurrency
 
-## Google finance provides currency conversion functionality. Integrated the scrapper to get currency.
-Now uses http://www.google.com/finance/converter?a=1&from=USD&to=INR
-
-## Unfortunately the Google API stopped working on Nov. 1st 2013.
-
-
-A simple Ruby interface for currency conversion using Google API. Uses http://www.google.com/ig/calculator?hl=en&q=100USD=?INR
+Google finance provides currency conversion functionality. Integrated the scrapper to get conversion working.
+Uses http://www.google.com/finance/converter?a=1&from=USD&to=INR
 
 [![Build Status](https://travis-ci.org/girishso/goog_currency.png?branch=master)](https://travis-ci.org/girishso/goog_currency) [![Gem Version](https://badge.fury.io/rb/goog_currency.png)](http://badge.fury.io/rb/goog_currency)
 
@@ -38,13 +33,8 @@ Throws GoogCurrency::NoMethodException if conversion method syntax is invalid.
 
 ## Ruby versions support
 
-Supports Ruby 1.9.2 and 2.0.0
+Supports Ruby 1.8.7, 1.9.2 and 2.0.0
 
-Ruby 1.8.7, has encoding issues.
-
-## TODO
-
-Fix for Ruby 1.8.7
 
 ## Contributing
 
