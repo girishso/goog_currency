@@ -9,7 +9,7 @@ module GoogCurrency
       raise NoMethodException, "GoogCurrency accepts methods in 'usd_to_inr' or 'gbp_to_usd' format"
     end
 
-    response = open("http://www.google.com/finance/converter?a=#{args.first}&from=#{from.upcase}&to=#{to.upcase}").read
+    response = open("http://finance.google.com/finance/converter?a=#{args.first}&from=#{from.upcase}&to=#{to.upcase}").read
     handle_response(response)
   end
 
